@@ -64,7 +64,7 @@ document.querySelectorAll('section:not([data-skip])').forEach(function (slide) {
 
 presentation.start()
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
   switch(event.key) {
     case "ArrowRight":
     case " ":
@@ -75,5 +75,14 @@ document.addEventListener('keydown', function(event) {
     case "a":
       presentation.prev()
       break
+  }
+})
+
+document.addEventListener('click', function (event) {
+  const x = event.clientX
+  if (x > document.documentElement.clientWidth / 2) {
+    presentation.next()
+  } else {
+    presentation.prev()
   }
 })
