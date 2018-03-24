@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Ubuntu+Mono:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/theme.css">
+
+  <title>W kółko to samo</title>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+</head>
+<body>
+
+<section>
+  <div class="dark full">
+    <h1>
+      W kółko to samo, czyli<br>
+      o iteracji słów kilka
+    </h1>
+    Piotr Szlachciak
+  </div>
+</section>
+
+<section>
+  <div class="dark full">
+    <pre data-trim><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+for (let i = 0; i < myArray.length; i++) {
+  doSomething(myArray[i])
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full">
+    <pre data-trim><code class="language-c">
+int myArray[] = { 1, 2, 3, 4, 5 };
+int length = sizeof(myArray) / sizeof(int);
+
+for (int i = 0; i < length; i++) {
+  doSomething(myArray[i]);
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=2>
+    <pre data-trim data-exit=1><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+for (let i = 0; i < myArray.length; i++) {
+  doSomething(myArray[i])
+}
+    </code></pre>
+    <pre data-trim data-enter=1 data-exit=2><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+
+// manage iteration
+for (let i = 0; i < myArray.length; i++) {
+
+  // perform action
+  doSomething(myArray[i])
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=2>
+    <pre data-trim><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+
+// manage iteration
+for (let i = 0; i < myArray.length; i++) {
+
+  // perform action
+  doSomething(myArray[i])
+}
+    </code></pre>
+  </div>
+
+  <div class="light" data-enter=2>
+    <pre data-trim data-exit=4><code class="language-javascript">
+// manage iteration
+function forEach (array, action) {
+  for (let i = 0; i < array.length; i++) {
+    action(array[i])
+  }
+}
+    </code></pre>
+    <pre data-trim data-enter=3 data-exit=4><code class="language-javascript">
+
+let myArray = [1, 2, 3, 4, 5]
+
+// perform action
+forEach(myArray, doSomething)
+    </code></pre>
+    <pre data-trim data-enter=4><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+
+// perform action
+myArray.forEach(doSomething)
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+function fibonacci (n) {
+  if (n == 0 || n == 1) {
+    return n
+  }
+  return fibonacci(n - 1) + fibonacci(n - 2)
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+function fibonacci (n) {
+  if (n == 0 || n == 1) {
+    return n
+  }
+  return fibonacci(n - 1) + fibonacci(n - 2)
+}
+    </code></pre>
+  </div>
+
+  <div class="light" data-enter=1>
+    <pre data-trim data-exit=2><code class="language-javascript">
+function forEach (array, action) {
+  if (array.length > 0) {
+    action(array[0])
+    forEach(array.slice(1), action)
+  }
+}
+    </code></pre>
+    <pre data-trim data-enter=2><code class="language-javascript">
+function forEach ([first, ...rest], action) {
+  action(first)
+  if (rest.length > 0) {
+    forEach(rest, action)
+  }
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+for (let i = 0; i < myArray.length; i++) {
+  myArray[i] = myArray[i] * 5
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+for (let i = 0; i < myArray.length; i++) {
+  myArray[i] = myArray[i] * 5
+}
+    </code></pre>
+  </div>
+
+  <div class="light" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+myArray = myArray.map(x => x * 5)
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark-header">
+    <img src="img/lodash_logo.png">
+  </div>
+
+  <div class="light-header">
+    <img src="img/ramda_logo.png">
+  </div>
+
+  <div class="dark">
+    <pre data-trim data-enter=1><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+myArray = _.map(myArray, x => x * 5)
+_.forEach(myArray, doSomething)
+    </code></pre>
+  </div>
+
+  <div class="light">
+    <pre data-trim data-enter=2><code class="language-javascript">
+const composed = R.compose(
+  R.forEach(doSomething),
+  R.map(x => x * 5)
+)
+
+let myArray = [1, 2, 3, 4, 5]
+composed(myArray)
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <h1>Generatory</h1>
+  </div>
+</section>
+
+<section>
+  <div class="dark full">
+    "Oprócz wszystkiego, twórcy JavaScript dodali również generatory.
+    Raczej niepotrzebnie, bo nie widzę dla nich żadnego zastosowania"
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+for (let i = 0; i < myArray.length; i++) {
+  doSomething(myArray[i])
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+for (let i = 0; i < myArray.length; i++) {
+  doSomething(myArray[i])
+}
+    </code></pre>
+  </div>
+
+  <div class="light" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+let myArray = [1, 2, 3, 4, 5]
+for (let item of myArray) {
+  doSomething(item)
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+let a = [1, 2, 3]
+
+let iterator = a[Symbol.iterator]()
+
+iterator.next()
+// { value: 1, done: false }
+
+iterator.next()
+// { value: 2, done: false }
+
+iterator.next()
+// { value: 3, done: false }
+
+iterator.next()
+// { value: undefined, done: true }
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+let a = [1, 2, 3]
+
+let iterator = a[Symbol.iterator]()
+
+iterator.next()
+// { value: 1, done: false }
+
+iterator.next()
+// { value: 2, done: false }
+
+iterator.next()
+// { value: 3, done: false }
+
+iterator.next()
+// { value: undefined, done: true }
+    </code></pre>
+  </div>
+
+  <div class="light" data-enter=1>
+    <pre data-trim data-enter=1><code class="language-javascript">
+function * generate123 () {
+  yield 1
+  yield 2
+  yield 3
+}
+
+let iterator = a[Symbol.iterator]()
+
+iterator.next()
+// { value: 1, done: false }
+
+iterator.next()
+// { value: 2, done: false }
+
+iterator.next()
+// { value: 3, done: false }
+
+iterator.next()
+// { value: undefined, done: true }
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim><code class="language-javascript">
+function * range (limit) {
+  for (let i = 0; i < limit; i++) {
+    yield i
+  }
+}
+    </code></pre>
+    <pre data-trim data-enter=1 data-exit=2><code class="language-javascript">
+
+for (let i of range(3)) {
+  console.log(i) // prints: 0, 1, 2
+}
+    </code></pre>
+    <pre data-trim data-enter=2><code class="language-javascript">
+
+for (let i of range(Infinity)) {
+  console.log(i) // prints: 0, 1, 2, 3, 4, ...
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim><code class="language-javascript">
+function * map (iterable, fn) {
+  for (let item of iterable) {
+    yield fn(item)
+  }
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+function getPowers (count) {
+  let powers = []
+  for (let i = 0; i < count; i++) {
+    powers.push(2 ** i)
+  }
+  return powers
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+function getPowers (count) {
+  let powers = []
+  for (let i = 0; i < count; i++) {
+    powers.push(2 ** i)
+  }
+  return powers
+}
+    </code></pre>
+  </div>
+
+  <div class="light" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+const powersIterator = map(
+  range(Infinity),
+  x => 2 ** x
+)
+
+// lazy evaluation
+for (let power of powersIterator) {
+  console.log(power) // prints: 1, 2, 4, 8, ...
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+function * range (limit) {
+  for (let i = 0; i < limit; i++) {
+    yield i
+  }
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+function * range (limit) {
+  for (let i = 0; i < limit; i++) {
+    yield i
+  }
+}
+    </code></pre>
+  </div>
+  <div class="light" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+let rangeIterator = range(3)
+
+for (let i of rangeIterator) {
+  console.log(i) // prints: 0, 1, 2
+}
+
+for (let i of rangeIterator) {
+  console.log(i) // never executed
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark">
+    <pre data-trim><code class="language-javascript">
+function range (limit) {
+  return {
+    *[Symbol.iterator]() {
+      for (let i = 0; i < limit; i++) {
+        yield i
+      }
+    }
+  }
+}
+    </code></pre>
+  </div>
+  <div class="light">
+    <pre data-trim><code class="language-javascript">
+let rangeIterable = range(3)
+
+for (let i of rangeIterable) {
+  console.log(i) // prints: 0, 1, 2
+}
+
+for (let i of rangeIterable) {
+  console.log(i) // prints: 0, 1, 2
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark">
+    <pre data-trim><code class="language-javascript">
+function map (iterable, fn) {
+  return {
+    *[Symbol.iterator]() {
+      for (let item of iterable) {
+        yield fn(item)
+      }
+    }
+  }
+}
+    </code></pre>
+  </div>
+  <div class="light">
+    <pre data-trim><code class="language-javascript">
+let powersIterable = map(
+  range(3),
+  x => 2 ** x
+)
+
+for (let i of powersIterable) {
+  console.log(i) // prints: 1, 2, 4
+}
+
+for (let i of powersIterable) {
+  console.log(i) // prints: 1, 2, 4
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+function forEach ([first, ...rest], action) {
+  action(first)
+  if (rest.length > 0) {
+    forEach(rest, action)
+  }
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1 data-exit=3>
+    <pre data-trim><code class="language-javascript">
+function forEach ([first, ...rest], action) {
+  action(first)
+  if (rest.length > 0) {
+    forEach(rest, action)
+  }
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=3>
+    <pre data-trim><code class="language-javascript">
+function forEach ({ first, rest }, action) {
+  action(first)
+  if (rest) {
+    forEach(rest, action)
+  }
+}
+    </code></pre>
+  </div>
+
+  <div class="light" data-enter=1>
+    <pre data-trim data-exit=2><code class="language-javascript">
+1 -> 2 -> 3
+    </code></pre>
+    <pre data-trim data-enter=2 data-exit=4><code class="language-javascript">
+let list = {
+  fist: 1,
+  rest: {
+    first: 2,
+    rest: {
+      first: 3
+    }
+  }
+}
+    </code></pre>
+    <pre data-trim data-enter=4><code class="language-javascript">
+class List {
+  constructor(first, rest) {
+    this.first = first
+    this.rest = rest
+  }
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim><code class="language-javascript">
+class List {
+  constructor(first, rest) {
+    this.first = first
+    this.rest = rest
+  }
+
+  *[Symbol.iterator]() {
+    let node = this
+    while(node) {
+      yield node.first
+      node = node.rest
+    }
+  }
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark">
+    <pre data-trim><code class="language-javascript">
+class List {
+  constructor(first, rest) {
+    this.first = first
+    this.rest = rest
+  }
+
+  *[Symbol.iterator]() {
+    let node = this
+    while(node) {
+      yield node.first
+      node = node.rest
+    }
+  }
+}
+    </code></pre>
+  </div>
+  <div class="light">
+    <pre data-trim><code class="language-javascript">
+let codes = new List(105,
+  new List(9829,
+    new List(117)
+  )
+)
+    </code></pre>
+    <pre data-trim data-enter=1 data-exit=2><code class="language-javascript">
+
+for(let code of codes) {
+  console.log(code) // output: 105 9829 117
+}
+    </code></pre>
+    <pre data-trim data-enter=2><code class="language-javascript">
+
+let message = map(codes, String.fromCharCode)
+    </code></pre>
+    <pre data-trim data-enter=3><code class="language-javascript">
+
+for(let char of message) {
+  console.log(char) // output: i ♥ u
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <h1>Iterable Sequence</h1>
+    (moja biblioteka)
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim><code class="language-javascript">
+import { range } from 'iterable-sequence'
+
+let powers = range(Infinity).map(x => 2 ** x)
+
+for (let power of powers.take(5)) {
+  console.log(power) // prints: 1, 2, 4, 8, 16
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim><code class="language-javascript">
+import { range, zip, repeat } from 'iterable-sequence'
+
+const zipped = zip(
+  range(10, 0, -2)
+  repeat('ab')
+)
+
+for(const [a, b] of zipped) {
+  console.log(`first: ${a}, second: ${b}`)
+  /* Output:
+    first: 10, second: a
+    first: 8, second: b
+    first: 6, second: a
+    first: 4, second: b
+    first: 2, second: a
+  */
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim data-enter=2 data-exit=3><code class="language-javascript">
+import List from './previous-slides'
+    </code></pre>
+    <pre data-trim><code class="language-javascript">
+import { map } from 'iterable-sequence'
+
+    </code></pre>
+    <pre data-trim data-exit=1><code class="language-javascript">
+let data = [0, 1, 2, 3]
+    </code></pre>
+    <pre data-trim data-enter=1 data-exit=2><code class="language-javascript">
+let data = '0123'
+    </code></pre>
+    <pre data-trim data-enter=2 data-exit=3><code class="language-javascript">
+let data = new List(0,
+  new List(1,
+    new List(2,
+      new List(3)
+    )
+  )
+)
+    </code></pre>
+    <pre data-trim data-enter=3 data-exit=4><code class="language-javascript">
+let data = function * () {
+  yield 0
+  yield 1
+  yield 2
+  yield 3
+}
+    </code></pre>
+    <pre data-trim data-enter=4><code class="language-javascript">
+let data = {
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  length: 4
+}
+    </code></pre>
+    <pre data-trim><code class="language-javascript">
+
+let mapped = map(data, x => 2 ** x)
+for(let x of mapped) {
+  console.log(x) // output: 1, 2, 4, 8
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full">
+    <h1>Generatory<br><small>LEVEL 2</small></h1>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim><code class="language-javascript">
+function * echo () {
+  let value = yield 'Tell me something.'
+  try {
+    yield value
+  } catch(e) {
+    console.log(e.message)
+  }
+}
+    </code></pre>
+    <pre data-trim data-enter=1><code class="language-javascript">
+
+let iterator = echo()
+iterator.next()
+// { value: 'Tell me something.', done: false }
+
+iterator.next('Hi echo')
+// { value: 'Hi echo', done: false }
+
+iterator.throw(new Error('Error Message'))
+// output: 'Error Message'
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim><code class="language-javascript">
+async function () {
+  let result = await callSomeApi()
+}
+    </code></pre>
+    <pre data-trim data-enter=1><code class="language-javascript">
+
+const asyncGenerator = makeAsync(function * () {
+  let result = yield callSomeApi()
+})
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <img src="img/Redux-Saga-Logo-Landscape.png" style="width: 100%" />
+  </div>
+</section>
+
+<section>
+  <div class="light full">
+    <pre data-trim><code class="language-javascript">
+const action = {
+  type: 'USER_FETCH_REQUESTED',
+  payload: { userId: 123 }
+}
+    </code></pre>
+    <pre data-trim data-enter=1><code class="language-javascript">
+
+const newState = reducer(oldState, action)
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full" style="padding: 8rem">
+    <pre data-trim><code class="language-javascript">
+import { call, put, takeEvery } from 'redux-saga/effects'
+import Api from '...'
+
+function * fetchUser(action) {
+  try {
+    const user = yield call(Api.fetchUser, action.payload.userId);
+    yield put({ type: 'USER_FETCH_SUCCEEDED', user: user });
+  } catch (e) {
+    yield put({ type: 'USER_FETCH_FAILED', message: e.message });
+  }
+}
+
+function * saga() {
+  yield takeEvery('USER_FETCH_REQUESTED', fetchUser);
+}
+
+// later, in a different file
+sagaMiddleware.run(saga)
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full">
+    <h1>Generatory<br><small>LEVEL 3</small></h1>
+  </div>
+</section>
+
+<section>
+  <div class="light full" style="padding: 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Jedna wartość</th>
+          <th>Wiele wartości</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Synchronicznie</th>
+          <td><code>function</code></th>
+          <td><code>function *</code></th>
+        </tr>
+        <tr>
+          <th>Asynchronicznie</th>
+          <td><code>async function</code></th>
+          <td data-exit=1 style="color: transparent"><code>async function *</code></th>
+          <td data-enter=1><code>async function *</code></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+function * syncGenerator () {
+  yield 1
+}
+
+const syncIterator = syncGenerator()
+
+syncIterator.next()
+// { value: 1, done: false }
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+function * syncGenerator () {
+  yield 1
+}
+
+const syncIterator = syncGenerator()
+
+syncIterator.next()
+// { value: 1, done: false }
+    </code></pre>
+  </div>
+  <div class="light" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+async function * asyncGenerator () {
+  yield 1
+}
+
+const asyncIterator = asyncGenerator()
+
+const promise = asyncIterator.next()
+promise.then(console.log)
+// { value: 1, done: false }
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="dark full" data-exit=1>
+    <pre data-trim><code class="language-javascript">
+async function * readLines (path) {
+  let file = await fileOpen(path)
+  try {
+    while (!file.EOF) {
+      yield await file.readLine()
+    }
+  } finally {
+    await file.close()
+  }
+}
+    </code></pre>
+  </div>
+  <div class="dark" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+async function * readLines (path) {
+  let file = await fileOpen(path)
+  try {
+    while (!file.EOF) {
+      yield await file.readLine()
+    }
+  } finally {
+    await file.close()
+  }
+}
+    </code></pre>
+  </div>
+  <div class="light" data-enter=1>
+    <pre data-trim><code class="language-javascript">
+const linesIterator = readLines(filePath)
+for await (const line of linesIterator) {
+  console.log(line);
+}
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="light full" style="padding: 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Jedna wartość</th>
+          <th>Wiele wartości</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Synchronicznie</th>
+          <td data-exit=1><code>function</code></th>
+          <td data-exit=1><code>function *</code></th>
+          <td data-enter=1><code>value</code></th>
+          <td data-enter=1><code>Array</code></th>
+        </tr>
+        <tr>
+          <th>Asynchronicznie</th>
+          <td data-exit=1><code>async function</code></th>
+          <td data-exit=1><code>async function *</code></th>
+          <td data-enter=1><code>Promise</code></th>
+          <td data-enter=1><code>Observable (RxJS)</code></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="dark full">
+    <p>Dziękuję za uwagę</p>
+    <a href="https://lodash.com/">
+      lodash.com
+    </a>
+    <br>
+    <a href="http://ramdajs.com/">
+      ramdajs.com
+    </a>
+    <br>
+    <a href="https://github.com/sz-piotr/iterable-sequence">
+      github.com/sz-piotr/iterable-sequence
+    </a>
+    <br>
+    <a href="https://redux-saga.js.org/">
+      redux-saga.js.org
+    </a>
+    <br>
+    <a href="https://github.com/tc39/proposal-async-iteration">
+      github.com/tc39/proposal-async-iteration
+    </a>
+    <br>
+    <a href="http://reactivex.io/rxjs/">
+      reactivex.io/rxjs/
+    </a>
+  </div>
+</section>
+
+<script src="js/trim.js"></script>
+<script src="js/prism.js"></script>
+<script src="js/slides.js"></script>
+
+</body>
+</html>
