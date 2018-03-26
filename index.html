@@ -299,7 +299,7 @@ function * generate123 () {
   yield 3
 }
 
-let iterator = a[Symbol.iterator]()
+let iterator = generate123()
 
 iterator.next()
 // { value: 1, done: false }
@@ -930,7 +930,7 @@ for await (const line of linesIterator) {
           <td data-exit=1><code>function</code></th>
           <td data-exit=1><code>function *</code></th>
           <td data-enter=1><code>value</code></th>
-          <td data-enter=1><code>Array</code></th>
+          <td data-enter=1><code>Iterable</code></th>
         </tr>
         <tr>
           <th>Asynchronicznie</th>
